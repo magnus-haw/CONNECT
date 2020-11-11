@@ -1,0 +1,110 @@
+{% extends "base_generic.html" %}
+
+
+{% block awardmenu %}active{% endblock %}
+
+
+{% block content %}
+<div class="card text-white bg-secondary my-5 py-4 text-center">
+  <div class="card-body">
+    <h1 class="text-white m-0">Fellowships/Awards</h1>
+  </div>
+</div>
+
+<!-- Heading Row -->
+<div class="row align-items-center my-5">
+  <!-- /.col-lg-8 -->
+  <div class="col-lg-9">
+    <h1 class="font-weight-light align-top">For Undergrads</h1>
+  </div>
+  <!-- /.col-md-4 -->
+</div>
+<!-- /.row -->
+
+{% for award in awards %}
+  {% if award.careerstage == 0 %}
+    <div class="row align-items-center">
+      <div class="col-lg-2">
+        <strong>Due: </strong>{{award.duedate}}
+      </div>
+      <div class="col-lg-10">
+        <a href="{{award.howtoapply}}">{{award}}</a>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+
+<hr><!-- Heading Row -->
+<div class="row align-items-center my-5">
+  <!-- /.col-lg-8 -->
+  <div class="col-lg-9">
+    <h1 class="font-weight-light align-top">For Graduate Students</h1>
+  </div>
+  <!-- /.col-md-4 -->
+</div>
+<!-- /.row -->
+
+{% for award in awards %}
+  {% if award.careerstage == 1 %}
+    <div class="row align-items-center">
+      <div class="col-lg-2">
+        <strong>Due: </strong>{{award.duedate}}
+      </div>
+      <div class="col-lg-10">
+        <a href="{{award.howtoapply}}">{{award}}</a>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+
+<hr><!-- Heading Row -->
+<div class="row align-items-center my-5">
+  <!-- /.col-lg-8 -->
+  <div class="col-lg-9">
+    <h1 class="font-weight-light align-top">For Postdocs</h1>
+  </div>
+  <!-- /.col-md-4 -->
+</div>
+<!-- /.row -->
+
+{% for award in awards %}
+  {% if award.careerstage == 2 %}
+    <div class="row align-items-center">
+      <div class="col-lg-2">
+        <strong>Due: </strong>{{award.duedate}}
+      </div>
+      <div class="col-lg-10">
+        <a href="{{award.howtoapply}}">{{award}}</a>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+
+<hr><!-- Heading Row -->
+<div class="row align-items-center my-5">
+  <!-- /.col-lg-8 -->
+  <div class="col-lg-9">
+    <h1 class="font-weight-light align-top">For Early Career Scientists</h1>
+  </div>
+  <!-- /.col-md-4 -->
+</div>
+<!-- /.row -->
+
+{% for award in awards %}
+  {% if award.careerstage == 3 %}
+    <div class="row align-items-center">
+      <div class="col-lg-2">
+        <strong>Due: </strong>{{award.duedate}}
+      </div>
+      <div class="col-lg-10">
+        <a href="{{award.howtoapply}}">{{award}}</a>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+
+<hr>
+{% endblock %}
+
+
+{% block lastupdated %}{{last}}{% endblock %}

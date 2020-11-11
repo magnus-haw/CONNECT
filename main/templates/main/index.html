@@ -1,0 +1,152 @@
+{% extends "base_generic.html" %}
+
+{% block homemenu %}active{% endblock %}
+
+{% block pageheader %}
+<header class="bg-primary py-5 mb-5">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-lg-12">
+          <h1 class="display-4 text-white mt-5 mb-2">CONNECT</h1>
+	  <p class="lead mb-5 text-white-50"><strong>DPP Committee for the Concerns Of Students and Early Career Scientists</strong></p>
+        </div>
+      </div>
+    </div>
+</header>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+      <div class="col-md-8 mb-5">
+        <h2>What We Do</h2>
+        <hr>
+        {{about.text|safe}}
+      </div>
+      <div class="col-md-4 mb-5">
+        <h2>Contact Us</h2>
+        <hr>
+        <address>
+          <strong>Chair: </strong>{{orgs.chair}}<br>
+	  {{orgs.chair.affiliation}}: {{orgs.chair.position}} 
+	  <a href="mailto:{{orgs.chair.email}}">{{orgs.chair.email}}</a>
+        </address>
+
+	<address>
+          <strong>Vice Chair: </strong>{{orgs.vicechair}}<br>
+          {{orgs.vicechair.affiliation}}: {{orgs.vicechair.position}}
+          <a href="mailto:{{orgs.vicechair.email}}">{{orgs.vicechair.email}}</a>
+        </address>
+
+	<address>
+          <strong>Past Chair: </strong>{{orgs.pastchair}}<br>
+          {{orgs.pastchair.affiliation}}: {{orgs.pastchair.position}}
+          <a href="mailto:{{orgs.pastchair.email}}">{{orgs.pastchair.email}}</a>
+        </address>
+      </div>
+    </div>
+    <!-- /.row -->
+
+<!--  Heading Row 
+<div class="row align-items-center my-5">
+  <div class="col-lg-7">
+    <img class="img-fluid rounded mb-4 mb-lg-0" src="http://placehold.it/900x400" alt="">
+  </div>
+  <div class="col-lg-5">
+    <h1 class="font-weight-light">DPP CONNECT</h1>
+    {{about.text|safe}}
+    <a class="btn btn-primary" href="#">Get Involved!</a>
+  </div>
+</div>
+-->
+    <!-- Call to action card 
+    <div class="card text-white bg-secondary my-5 py-4 text-center">
+      <div class="card-body">
+        <p class="text-white m-0">This call to action card is a great place to showcase some important information or display a clever tagline!</p>
+      </div>
+    </div>
+    -->
+    
+
+    <!-- Content Row -->
+    <div class="row">
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+		  <h2 class="card-title"><a href="{% url 'meeting' %}">{{current.title}}</a></h2>
+		  <p class="card-text">CONNECT hosts two major events at the annual meeting: a <strong>town hall</strong> and a <strong>student day</strong>. Other events of interest are the job fair and the plasma expo.</p>
+	    <div class="row"><div class="col-md-12">
+             <strong><p>Past Meetings</p></strong>
+            </div></div>
+	    <div class="row"><div class="col-md-12">
+	    <ul>
+              {% for meeting in meetings %}
+	      <li><a href="{% url 'meeting-detail' pk=meeting.pk %}">{{meeting.title}}</a></li>
+	      {% endfor %}
+            </ul>
+            </div></div>
+          </div>
+	  <!--
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary btn-sm">More Info</a>
+          </div>
+	  -->
+        </div>
+      </div>
+      <!-- /.col-md-4 -->
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Fellowships/Awards</h2>
+            <p class="card-text">List of fellowship/awards with upcoming deadlines.</p>
+	    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+              <tbody>
+            {% for entry in awards %}
+            <tr><th scope="row"><a href="{{entry.howtoapply}}">{{entry.title}}</a></th></tr>
+            {% endfor %}
+              </tbody>
+            </table>
+            </div>
+          </div>
+          <div class="card-footer">
+            <a href="{% url 'awards' %}" class="btn btn-primary btn-sm">More Info</a>
+          </div>
+	  
+        </div>
+      </div>
+      <!-- /.col-md-4 -->
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <div class="card-body">
+            <h2 class="card-title">Plasma Jobs</h2>
+            <p class="card-text">List of plasma related jobs currently on the APS, AGU, and AAS job boards.</p>
+	    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+            <table class="table table-bordered table-striped mb-0">
+              <tbody>
+            {% for entry in agujobfeed.entries %}
+	    <tr><th scope="row"><a href="{{entry.link}}">{{entry.title}}</a></th></tr>
+	    {% endfor %}
+            {% for entry in apsjobfeed.entries %}
+	    <tr><th scope="row"><a href="{{entry.link}}">{{entry.title}}</a></th></tr>
+            {% endfor %}
+	    {% for entry in aasjobfeed %}
+            <tr><th scope="row"><a href="{{entry.Link}}">{{entry.Title}}</a></th></tr>
+            {% endfor %}
+	      </tbody>
+	    </table>
+	    </div>
+          </div>
+	  
+          <div class="card-footer">
+            <a href="https://careers.aps.org/jobs/" class="btn btn-primary btn-sm">APS Job Board</a>
+          </div>
+	  
+        </div>
+      </div>
+      <!-- /.col-md-4 -->
+
+    </div>
+    <!-- /.row -->
+{% endblock %}
+
+{% block lastupdated %}{{about.last_modified}}{% endblock %}

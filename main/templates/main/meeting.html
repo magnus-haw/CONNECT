@@ -1,0 +1,137 @@
+{% extends "base_generic.html" %}
+
+
+{% block meetingmenu %}active{% endblock %}
+
+
+{% block content %}
+
+<div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+	<h1 class="mt-4">{{current.title}}</h1>
+        <hr>
+        <!-- Preview Image 
+        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+        -->
+
+        <!-- Post Content -->
+
+        <!-- Student Day -->
+	{% if current.studentday %}
+        <div class="card mb-4">
+          <div class="card-body" id="studentday">
+            <h2 class="card-title">{{current.studentday.title}}</h2>
+	    {{current.studentday.block0|safe}}
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{current.studentday.last_modified}}
+          </div>
+        </div>
+	{% endif %}
+
+	<!-- Town Hall -->
+        {% if current.townhall %}
+        <div class="card mb-4">
+          <div class="card-body" id="townhall">
+            <h2 class="card-title">{{current.townhall.title}}</h2>
+	    <p>{{current.townhall.description}}</p>
+	    {% if current.townhall.panel %}
+	      <p>We would like to thank the panelists again for their time and insights:</p>
+	      <table class="table table-bordered table-striped mb-0"><tbody>
+	      {% for member in current.townhall.panel.members.all %}
+                <tr>
+                    <th><a href="{% url 'person-detail' pk=member.person.pk %}">{{member.person}}</th>
+		    <th>{{member.person.position}}</th>
+		    <th>{{member.person.affiliation}}</th>
+		</tr>
+	      {% endfor %}
+	      </tbody>
+            </table><br>
+	    {% endif %}
+            {{current.townhall.block0|safe}}
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{current.townhall.last_modified}}
+
+	    {% if current.townhall.resources %}
+	    {% for resource in current.townhall.resources.all %}
+	    &nbsp;&nbsp;<a href="{{resource.file.url}}">{{resource.title}}</a>
+	    {% endfor %}
+	    {% endif %}
+          </div>
+        </div>
+        {% endif %}
+
+        <hr>
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Location Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Location</h5>
+          <div class="card-body">
+            <address>
+              {{current.location}}<br>
+	      {{current.location.street}}<br>
+              {{current.location.city}}, {{current.location.state}}<br>
+	      {{current.location.zipcode}}<br>
+	    </address>
+	    <p>{{current.location.description}}</p>
+          </div>
+        </div>
+
+        <!-- Events Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Events</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#townhall">Town Hall</a>
+                  </li>
+                  <li>
+                    <a href="#studentday">Student Day</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#">Job Fair</a>
+                  </li>
+                  <li>
+                    <a href="#">Plasma Expo</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">All Meetings</h5>
+          <div class="card-body">
+            <ul>
+            {% for meeting in old %}
+              <li><a href="{% url 'meeting-detail' pk=meeting.pk %}">{{meeting.title}}</a></li>
+            {% endfor %}
+	    </ul>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- /.row -->
+{% endblock %}
+
+
+{% block lastupdated %}{{current.last_modified}}{% endblock %}

@@ -1,0 +1,129 @@
+{% extends "base_generic.html" %}
+
+
+{% block resourcesmenu %}active{% endblock %}
+
+
+{% block content %}
+<div class="row">
+
+      <div class="col-lg-3">
+
+        <h1 class="my-4">Student Resources</h1>
+        <div class="list-group">
+          <a href="#awards" class="list-group-item">Awards</a>
+          <a href="#jobs" class="list-group-item">Jobs</a>
+        </div>
+
+      </div>
+      <!-- /.col-lg-3 -->
+
+      <div class="col-lg-9">
+
+        <div class="row">
+          <div class="card my-4">
+	    <h5 class="card-header">Summary</h5>
+            <div class="card-body">
+              {{page.aboutblock|safe}}
+            </div>
+          </div>
+        </div>
+
+	<div class="row">
+          <div class="card my-4" id="awards">
+            <h5 class="card-header">Fellowships/Awards</h5>
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-lg-6">
+                  {{page.awardblock|safe}}
+                </div>
+                <div class="col-lg-6">
+                   <strong>Resources</strong>
+		   <ul>
+                     {% for res in page.resources.all %}
+		      {% if res.category == 0 %}
+		       {% if res.file %}
+		       <li><a href="{{res.file.url}}">{{res.title}}</a></li>
+		       {% elif res.link %}
+		       <li><a href="{{res.link}}">{{res.title}}</a></li>
+		       {% endif %}
+		      {% endif %}
+		     {% endfor %}
+                   </ul>
+                </div>
+              </div>
+
+
+              <div class="row">
+		<div class="col-lg-12">
+                <hr>
+                <h3>Undergradate</h3>
+                {% for award in awards %}
+                  {% if award.careerstage == 0 %}
+                    <div class="row align-items-center">
+                      <div class="col-lg-3">
+                        <strong>Due: </strong>{{award.duedate}}
+                      </div>
+                      <div class="col-lg-9">
+                        <a href="{{award.howtoapply}}">{{award}}</a>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+                <hr>                
+		<h3>Graduate</h3>
+                {% for award in awards %}
+                  {% if award.careerstage == 1 %}
+                    <div class="row align-items-center">
+                      <div class="col-lg-3">
+                        <strong>Due: </strong>{{award.duedate}}
+                      </div>
+                      <div class="col-lg-9">
+                        <a href="{{award.howtoapply}}">{{award}}</a>
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+
+	      </div> 
+	      </div>
+	      <!-- end card row -->
+            </div>
+	    <!-- end card body -->
+          </div>
+	  <!-- end card -->
+        </div>
+	<!-- end row -->
+
+	<div class="row">
+          <div class="card my-4" id="jobs">
+            <h5 class="card-header">Jobs</h5>
+            <div class="card-body">
+
+              <div class="row">
+                <div class="col-lg-6">
+                  {{page.careerblock|safe}}
+                </div>
+                <div class="col-lg-6">
+                   <strong>Resources</strong>
+                   <ul>
+                     {% for res in page.resources.all %}
+                      {% if res.category == 1 %}
+                       {% if res.file %}
+                       <li><a href="{{res.file.url}}">{{res.title}}</a></li>
+                       {% elif res.link %}
+                       <li><a href="{{res.link}}">{{res.title}}</a></li>
+                       {% endif %}
+                      {% endif %}
+                     {% endfor %}
+                   </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+{% endblock %}

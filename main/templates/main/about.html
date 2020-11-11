@@ -1,0 +1,61 @@
+{% extends "base_generic.html" %}
+
+
+{% block aboutmenu %}active{% endblock %}
+
+
+{% block content %}
+<div class="card text-white bg-secondary my-5 py-4 text-center">
+  <div class="card-body">
+    <h1 class="text-white m-0">CONNECT Committee Members</h1>
+  </div>
+</div>
+
+<!-- Heading Row -->
+<div class="row align-items-center my-5">
+  <div class="col-lg-3">
+    <img class="img-fluid rounded mb-4 mb-lg-0" src="{{orgs.chair.image.url}}" alt="">
+  </div>
+  <div class="col-lg-9">
+    <h1 class="font-weight-light align-top"><a href="{% url 'person-detail' orgs.chair.pk %}">{{orgs.chair}} (Chair)</a></h1>
+    <p><strong>Affiliation: </strong>{{orgs.chair.affiliation}}</p>
+    <p><strong>Position: </strong>{{orgs.chair.position}}</p>
+    <p><strong>Bio: </strong>{{orgs.chair.description}}</p>
+  </div>
+</div>
+<!-- /.row -->
+
+<!-- Heading Row -->
+<div class="row align-items-center my-5">
+  <div class="col-lg-3">
+    <img class="img-fluid rounded mb-4 mb-lg-0" src="{{orgs.vicechair.image.url}}" alt="">
+  </div>
+  <div class="col-lg-9">
+    <h1 class="font-weight-light"><a href="{% url 'person-detail' orgs.vicechair.pk %}">{{orgs.vicechair}} (Vice Chair)</a></h1>
+    <p><strong>Affiliation: </strong>{{orgs.vicechair.affiliation}}</p>
+    <p><strong>Position: </strong>{{orgs.vicechair.position}}</p>
+    <p><strong>Bio: </strong>{{orgs.vicechair.description}}</p>
+  </div>
+</div>
+<!-- /.row -->
+
+<!-- Heading Row -->
+<div class="row align-items-center my-5">
+  <div class="col-lg-3">
+    <img class="img-fluid rounded mb-4 mb-lg-0" src="{{orgs.pastchair.image.url}}" alt="">
+  </div>
+  <div class="col-lg-9">
+    <h1 class="font-weight-light"><a href="{% url 'person-detail' orgs.pastchair.pk %}">{{orgs.pastchair}} (Past Chair)</a></h1>
+    <p><strong>Affiliation: </strong>{{orgs.pastchair.affiliation}}</p>
+    <p><strong>Position: </strong>{{orgs.pastchair.position}}</p>
+    <p><strong>Bio: </strong>{{orgs.pastchair.description}}</p>
+  </div>
+</div>
+<!-- /.row -->
+<hr>
+
+
+{% endblock %}
+
+{% block lastupdated %}{{orgs.chair.last_modified}}{% endblock %}
+

@@ -1,0 +1,24 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row align-items-center my-5">
+  <div class="col-lg-3">
+    <img class="img-fluid rounded mb-4 mb-lg-0" src="{{person.image.url}}" alt="">
+  </div>
+  <div class="col-lg-4">
+    <h1 class="font-weight-light">{{ person }}</h1>
+    <p><strong>Position:</strong> {{ person.position }}</p> 
+    <p><strong>Affiliation:</strong> {{ person.affiliation }}</p>
+    <p><strong>Email:</strong> {{person.email}} </p>
+    <p><strong>ORCID:</strong> <a href="https://orcid.org/{{ person.ORCID }}">{{ person.ORCID }}</a></p> 
+    <p><strong>Research Website:</strong> <a href="{{ person.website }}">{{ person.website }}</a></p> 
+  </div>
+  <div class="col-lg-5">
+    {{person.description}}
+  </div>
+</div>
+{% endblock %}
+
+{% block lastupdated %}{{person.last_modified}}{% endblock %}
