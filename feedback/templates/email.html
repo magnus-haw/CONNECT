@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block contactmenu %}active{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-md-5 pt-5 pb-5"> 
+  <p>If you have questions, suggestions, or corrections, please contact us using this form. We will try to get back to you as soon as possible.</p> <p>If you want us to follow up with you please also include your contact information.</p> 
+<hr>
+<p></p>
+<img class="mx-auto d-block" src="{% static 'mailbox.jpeg' %}" style="width:35%" alt="Mailbox"> 
+</div>
+<!-- templates/email.html -->
+<div class="col-md-7 pt-5 pb-5">
+<h1>Contact Us</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="form-actions">
+      <button type="submit">Send</button>
+    </div>
+</form>
+</div>
+</div>
+{% endblock %}
+
+{% block lastupdated %}Feb. 9, 2021{% endblock %}
