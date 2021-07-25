@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')#'i-3x7a=qpd*+x#g$ll4et!lzc+$uah20z-5w^x6+bqf(mxn*a('
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG',cast=bool)
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'main',
     'ckeditor',
     'ckeditor_uploader',
+    'feedback',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +122,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -166,4 +171,21 @@ CKEDITOR_CONFIGS = {
         ]
     },
 }
+
+
+SENDGRID_API_KEY = config('SENDGRID_API_KEY')
+
+#EMAIL_HOST = 'smtp.sendgrid.net'
+#EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
+#EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = config('EMAIL_PORT',cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 

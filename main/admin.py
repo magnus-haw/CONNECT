@@ -26,3 +26,4 @@ admin.site.register(Panel,PanelAdmin)
 admin.site.register(HTMLBlock)
 admin.site.register(Resource)
 admin.site.register(ResourcePage)
+
