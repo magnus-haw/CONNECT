@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Person,Meeting,TownHall,StudentDay,Panel,Location
 from .models import OrgsList,MemberAtLarge,PanelMember,HTMLBlock
-from .models import Award, Resource, ResourcePage
+from .models import Award, Resource, ResourcePage, JobPosting
 
 admin.site.site_header = 'CONNECT Database'
 
@@ -26,4 +26,4 @@ admin.site.register(Panel,PanelAdmin)
 admin.site.register(HTMLBlock)
 admin.site.register(Resource)
 admin.site.register(ResourcePage)
-
+admin.site.register(JobPosting)

@@ -180,3 +180,11 @@ class HTMLBlock(models.Model):
     def __str__(self):
         return self.name
 
+class JobPosting(models.Model):
+    title = models.CharField(max_length=300)
+    link = models.URLField(unique=True)
+    description = models.TextField(null=True, blank=True)
+    pubdate = models.DateField(null=True)
+
+    def __str__(self):
+        return self.title

@@ -14,7 +14,9 @@
 <!-- Heading Row -->
 <div class="row align-items-center my-5">
   <div class="col-lg-3">
+    {% if orgs.chair.image %}
     <img class="img-fluid rounded mb-4 mb-lg-0" src="{{orgs.chair.image.url}}" alt="">
+    {% endif %}
   </div>
   <div class="col-lg-9">
     <h1 class="font-weight-light align-top"><a href="{% url 'person-detail' orgs.chair.pk %}">{{orgs.chair}} (Chair)</a></h1>
@@ -28,7 +30,9 @@
 <!-- Heading Row -->
 <div class="row align-items-center my-5">
   <div class="col-lg-3">
+    {% if orgs.vicechair.image %}
     <img class="img-fluid rounded mb-4 mb-lg-0" src="{{orgs.vicechair.image.url}}" alt="">
+    {% endif %}
   </div>
   <div class="col-lg-9">
     <h1 class="font-weight-light"><a href="{% url 'person-detail' orgs.vicechair.pk %}">{{orgs.vicechair}} (Vice Chair)</a></h1>
@@ -42,7 +46,9 @@
 <!-- Heading Row -->
 <div class="row align-items-center my-5">
   <div class="col-lg-3">
+    {% if orgs.pastchair.image %}
     <img class="img-fluid rounded mb-4 mb-lg-0" src="{{orgs.pastchair.image.url}}" alt="">
+    {% endif %}
   </div>
   <div class="col-lg-9">
     <h1 class="font-weight-light"><a href="{% url 'person-detail' orgs.pastchair.pk %}">{{orgs.pastchair}} (Past Chair)</a></h1>

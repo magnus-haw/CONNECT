@@ -12,8 +12,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from decouple import config
+from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+#BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'django_cron',
     'main',
     'ckeditor',
     'ckeditor_uploader',
@@ -52,6 +55,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CRON_CLASSES = [
+    "main.parser.MyCronJob",
+    # ...
 ]
 
 ROOT_URLCONF = 'dppConnect.urls'
@@ -78,7 +86,15 @@ WSGI_APPLICATION = 'dppConnect.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
+if config('LOCAL',cast=bool):
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': config('DB_NAME'),
@@ -86,8 +102,8 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
         'PORT': '',
+        }
     }
-}
 
 
 # Password validation
@@ -122,8 +138,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
+if not config('LOCAL',cast=bool):
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
