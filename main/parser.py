@@ -13,6 +13,7 @@ class objectview(object):
         self.__dict__ = d
 
 def get_AAS_jobs(base="https://jobregister.aas.org",query="/jobs/query?&body=plasma"):
+    return []
     xhtml = url_get_contents(base+query).decode('utf-8')
     soup = BeautifulSoup(xhtml, 'html.parser')
     links =[]
