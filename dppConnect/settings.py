@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'corsheaders',
     'django_cron',
+    'django_extensions',
     'main',
     'ckeditor',
     'ckeditor_uploader',
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -61,6 +64,12 @@ CRON_CLASSES = [
     "main.parser.MyCronJob",
     # ...
 ]
+
+CORS_ALLOWED_ORIGINS = [
+"https://dpp-static.s3.amazonaws.com/static/",
+"http://localhost:8080",
+]
+
 
 ROOT_URLCONF = 'dppConnect.urls'
 
@@ -81,7 +90,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'dppConnect.wsgi.application'
-
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
@@ -173,8 +182,10 @@ DEFAULT_FILE_STORAGE = 'dppConnect.storage_backends.PublicMediaStorage'
 
 
 # CK Editor settings
+#CKEDITOR_BASEPATH = STATIC_URL+"/ckeditor/"
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'
+#CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'
 CKEDITOR_CONFIGS = {
     'myconfig': {
         'toolbar': 'Custom',
@@ -188,7 +199,7 @@ CKEDITOR_CONFIGS = {
         ]
     },
 }
-
+AWS_QUERYSTRING_AUTH = False
 
 SENDGRID_API_KEY = config('SENDGRID_API_KEY')
 
