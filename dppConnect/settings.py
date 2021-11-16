@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
-    'corsheaders',
     'django_cron',
     'django_extensions',
     'main',
@@ -52,13 +51,26 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
+
+CSP_DEFAULT_SRC = ["'self'", '127.0.0.1:8000', "https://dpp-static.s3.amazonaws.com"]
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'", "https://dpp-static.s3.amazonaws.com"]
+CSP_SCRIPT_SRC = [
+    "https://stackpath.bootstrapcdn.com",
+    "https://cdn.jsdelivr.net",
+    "https://code.jquery.com",
+    "https://dpp-static.s3.amazonaws.com",
+    "'self'",
+    "'unsafe-inline'",
+]
+CSP_IMG_SRC = ["'self'", "https://dpp-static.s3.amazonaws.com",]
+CSP_INCLUDE_NONCE_IN = ('script-src', )
 
 CRON_CLASSES = [
     "main.parser.MyCronJob",
@@ -179,7 +191,7 @@ STATICFILES_STORAGE = 'dppConnect.storage_backends.StaticStorage'
 PUBLIC_MEDIA_LOCATION = 'media'
 MEDIA_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, PUBLIC_MEDIA_LOCATION)
 DEFAULT_FILE_STORAGE = 'dppConnect.storage_backends.PublicMediaStorage'
-
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 # CK Editor settings
 #CKEDITOR_BASEPATH = STATIC_URL+"/ckeditor/"
