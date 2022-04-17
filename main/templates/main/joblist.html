@@ -1,0 +1,25 @@
+{% extends "base_generic.html" %}
+{% load render_table from django_tables2 %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<div class="row align-items-center my-5">
+
+  <div class="col-lg-12">
+    <p>List of plasma related jobs currently on the APS, AGU, and AAS job boards.</p>
+    <hr>
+
+    {% if filter %}
+    <form action="" method="get" class="form form-inline">
+        {% bootstrap_form filter.form layout='inline' %}
+        {% bootstrap_button 'filter' %}
+    </form>
+    {% endif %}
+    {% render_table table %}
+  </div>
+  
+</div>
+{% endblock %}
+
+{% block lastupdated %}{{last_modified}}{% endblock %}

@@ -5,7 +5,15 @@ from main.models import OrgsList,PanelMember, MemberAtLarge, Award
 from main.models import ResourcePage, Resource
 from main.models import HTMLBlock
 from django.utils import timezone
+from django.utils.html import format_html
 import feedparser 
+
+import django_filters
+from django_filters.views import FilterView
+from django_tables2.views import SingleTableMixin
+import django_tables2 as tables
+from django_tables2 import A
+
 
 def index(request):
     """View function for home page of site."""
@@ -87,3 +95,47 @@ def MeetingDetailView(request,pk):
     context={"current":current,"old":meetings}
     # Render the HTML template with the data in the context variable
     return render(request, 'main/meeting.html', context=context)
+
+
+class TruncatedTextColumn(tables.Column):
+    '''A Column to limit to 100 characters and add an ellipsis'''
+    def render(self, value):
+        if len(value) > 102:
+            return value[0:99] + '...'
+        return str(value)
+
+class JobFilter(django_filters.FilterSet):
+    title = django_filters.CharFilter(lookup_expr='icontains')
+    description = django_filters.CharFilter(lookup_expr='icontains')
+
+    class Meta:
+        model = JobPosting
+        fields = ['title', 'description']
+
+class JobTable(tables.Table):
+    title = tables.Column()
+    description = TruncatedTextColumn(accessor=A('description'))
+    class Meta:
+        model = JobPosting
+        template_name = "django_tables2/bootstrap.html"
+        fields = ["title",'description','pubdate']
+    
+    def render_title(self, value, record):
+        return format_html("<a href={}>{}</a>", record.link, value)
+
+class JobListView(SingleTableMixin, FilterView):
+    table_class = JobTable
+    model = JobPosting
+    template_name = "main/joblist.html"
+    filterset_class = JobFilter
+
+
+# def joblist(request):
+#     """View function for joblist page of site."""
+    
+#     jobs = JobPosting.objects.all().order_by('-pubdate')
+    
+#     context={"jobs":jobs}
+
+#     # Render the HTML template index.html with the data in the context variable
+#     return render(request, 'main/joblist.html', context=context)
