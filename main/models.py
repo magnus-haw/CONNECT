@@ -180,11 +180,20 @@ class HTMLBlock(models.Model):
     def __str__(self):
         return self.name
 
+JOB_TYPE = (
+    (0, 'Post-doc'),
+    (1, 'Nat. Lab'),
+    (2, 'Prof'),
+    (3, 'Other')
+)
+
 class JobPosting(models.Model):
+
     title = models.CharField(max_length=300)
     link = models.URLField(unique=True)
     description = models.TextField(null=True, blank=True)
     pubdate = models.DateField(null=True)
+    jobtype = models.PositiveIntegerField(choices=JOB_TYPE,default=3)
 
     def __str__(self):
         return self.title

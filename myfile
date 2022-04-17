@@ -1,0 +1,144 @@
+GET http://127.0.0.1:8000/admin/main/studentday/1/change
+User-Agent: lwp-request/6.43 libwww-perl/6.43
+
+302 Found
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+Date: Tue, 16 Nov 2021 19:45:21 GMT
+Location: /admin/login/?next=/admin/main/studentday/1/change
+Server: WSGIServer/0.2 CPython/3.8.10
+Vary: Cookie
+Content-Length: 0
+Content-Type: text/html; charset=utf-8
+Expires: Tue, 16 Nov 2021 19:45:21 GMT
+Client-Date: Tue, 16 Nov 2021 19:45:21 GMT
+Client-Peer: 127.0.0.1:8000
+Client-Response-Num: 1
+Content-Security-Policy: default-src 'self'; script-src https://stackpath.bootstrapcdn.com https://cdn.jsdelivr.net https://code.jquery.com https://dpp-static.s3.amazonaws.com; style-src 'self' cdn.jsdelivr.net dpp-static.s3.amazonaws.com
+Referrer-Policy: same-origin
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+
+GET http://127.0.0.1:8000/admin/login/?next=/admin/main/studentday/1/change
+User-Agent: lwp-request/6.43 libwww-perl/6.43
+
+200 OK
+Cache-Control: max-age=0, no-cache, no-store, must-revalidate, private
+Date: Tue, 16 Nov 2021 19:45:21 GMT
+Server: WSGIServer/0.2 CPython/3.8.10
+Vary: Cookie
+Content-Length: 2432
+Content-Type: text/html; charset=utf-8
+Expires: Tue, 16 Nov 2021 19:45:21 GMT
+Client-Date: Tue, 16 Nov 2021 19:45:21 GMT
+Client-Peer: 127.0.0.1:8000
+Client-Response-Num: 1
+Content-Security-Policy: default-src 'self'; script-src https://stackpath.bootstrapcdn.com https://cdn.jsdelivr.net https://code.jquery.com https://dpp-static.s3.amazonaws.com; style-src 'self' cdn.jsdelivr.net dpp-static.s3.amazonaws.com
+Link: <https://dpp-static.s3.amazonaws.com/static/admin/css/base.css>; rel="stylesheet"; type="text/css"
+Link: <https://dpp-static.s3.amazonaws.com/static/admin/css/nav_sidebar.css>; rel="stylesheet"; type="text/css"
+Link: <https://dpp-static.s3.amazonaws.com/static/admin/css/login.css>; rel="stylesheet"; type="text/css"
+Link: <https://dpp-static.s3.amazonaws.com/static/admin/css/responsive.css>; rel="stylesheet"; type="text/css"
+Referrer-Policy: same-origin
+Set-Cookie: csrftoken=OzUNMAnprNIQmSge6Rwuzvw0w2QkbziFf5R7CK9DhqMmrSimUgidc2ygKm7G2j3U; expires=Tue, 15 Nov 2022 19:45:21 GMT; Max-Age=31449600; Path=/; SameSite=Lax; Secure
+Title: Log in | Django site admin
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Meta-Robots: NONE,NOARCHIVE
+X-Meta-Viewport: user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0
+
+<!DOCTYPE html>
+
+<html lang="en-us" dir="ltr">
+<head>
+<title>Log in | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="https://dpp-static.s3.amazonaws.com/static/admin/css/base.css">
+
+  <link rel="stylesheet" type="text/css" href="https://dpp-static.s3.amazonaws.com/static/admin/css/nav_sidebar.css">
+  <script src="https://dpp-static.s3.amazonaws.com/static/admin/js/nav_sidebar.js" defer></script>
+
+<link rel="stylesheet" type="text/css" href="https://dpp-static.s3.amazonaws.com/static/admin/css/login.css">
+
+
+
+
+
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://dpp-static.s3.amazonaws.com/static/admin/css/responsive.css">
+    
+
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+
+
+<body class=" login"
+  data-admin-utc-offset="0">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">CONNECT Database</a></h1>
+
+        </div>
+        
+        
+    </div>
+    <!-- END Header -->
+    
+    
+
+    <div class="main shifted" id="main">
+      
+        
+      
+      <div class="content">
+        
+          
+        
+        <!-- Content -->
+        <div id="content" class="colM">
+          
+          
+          
+          
+
+
+
+
+<div id="content-main">
+
+
+
+<form action="/admin/login/?next=/admin/main/studentday/1/change" method="post" id="login-form"><input type="hidden" name="csrfmiddlewaretoken" value="txVI5Nkd2vKIafpalGaiZJzM3Fq6NuaBU3S2VX6rS8Oeffri95W1CgB2hZHsEeVQ">
+  <div class="form-row">
+    
+    <label class="required" for="id_username">Username:</label> <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username">
+  </div>
+  <div class="form-row">
+    
+    <label class="required" for="id_password">Password:</label> <input type="password" name="password" autocomplete="current-password" required id="id_password">
+    <input type="hidden" name="next" value="/admin/main/studentday/1/change">
+  </div>
+  
+  
+  <div class="submit-row">
+    <input type="submit" value="Log in">
+  </div>
+</form>
+
+</div>
+
+          
+          <br class="clear">
+        </div>
+        <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+    </div>
+</div>
+<!-- END Container -->
+</body>
+</html>
