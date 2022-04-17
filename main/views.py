@@ -119,6 +119,7 @@ class JobTable(tables.Table):
         model = JobPosting
         template_name = "django_tables2/bootstrap.html"
         fields = ["title",'description','pubdate']
+        order_by = '-pubdate'
     
     def render_title(self, value, record):
         return format_html("<a href={}>{}</a>", record.link, value)
