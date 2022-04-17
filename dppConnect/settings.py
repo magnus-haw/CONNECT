@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'csp.middleware.CSPMiddleware',
 ]
 
-CSP_DEFAULT_SRC = ["'self'", '127.0.0.1:8000', "https://dpp-static.s3.amazonaws.com"]
+CSP_DEFAULT_SRC = ["'self'", '127.0.0.1:8000', "'unsafe-inline'", "https://dpp-static.s3.amazonaws.com"]
 CSP_STYLE_SRC = ["'self'", "'unsafe-inline'", "https://dpp-static.s3.amazonaws.com"]
 CSP_SCRIPT_SRC = [
     "https://stackpath.bootstrapcdn.com",
