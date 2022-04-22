@@ -130,13 +130,3 @@ class JobListView(SingleTableMixin, FilterView):
     template_name = "main/joblist.html"
     filterset_class = JobFilter
 
-
-# def joblist(request):
-#     """View function for joblist page of site."""
-    
-#     jobs = JobPosting.objects.all().order_by('-pubdate')
-    
-#     context={"jobs":jobs}
-
-#     # Render the HTML template index.html with the data in the context variable
-#     return render(request, 'main/joblist.html', context=context)

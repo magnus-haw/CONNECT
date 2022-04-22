@@ -49,6 +49,9 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'feedback',
+    'survey',
+    'bootstrapform',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'csp.middleware.CSPMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 CSP_DEFAULT_SRC = ["'self'", '127.0.0.1:8000', "'unsafe-inline'", "https://dpp-static.s3.amazonaws.com"]
@@ -232,3 +236,5 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool)
 EMAIL_USE_SSL = config('EMAIL_USE_SSL', cast=bool)
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
+CSV_DIRECTORY = Path("csv") # Define the directory where csv are exported
+TEX_DIRECTORY = Path("tex") # Define the directory where tex files and pdf are exported

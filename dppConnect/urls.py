@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path,include
-from django.views.generic import TemplateView
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +25,11 @@ urlpatterns = [
 urlpatterns += [
     path('', include('main.urls')),
     path("feedback/", include('feedback.urls')),
+    path("surveys/", include("survey.urls")),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [path("__debug__/", include(debug_toolbar.urls)),] + urlpatterns
