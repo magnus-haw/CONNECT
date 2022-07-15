@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row align-items-center my-5">
+    <div class="col-lg-9">
+        <div class="card my-4">
+            <h5 class="card-header">About</h5>
+            <div class="card-body">
+                {{page.aboutblock|safe}}
+            </div>
+        </div>
+        <div class="card my-4">
+            <h5 class="card-header">Summary</h5>
+            <div class="card-body">
+                {{page.volunteerblock|safe}}
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="card my-4">
+                <h5 class="card-header">Resources</h5>
+                <div class="card-body">
+                    {% for res in resources %}
+                        <p>{{res.title}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block lastupdated %}{{page.last_modified}}{% endblock %}

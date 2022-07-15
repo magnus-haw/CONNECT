@@ -199,9 +199,9 @@ else:
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
     AWS_QUERYSTRING_AUTH = False
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static'),
+    ]
 
 # CK Editor settings
 #CKEDITOR_BASEPATH = STATIC_URL+"/ckeditor/"

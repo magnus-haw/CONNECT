@@ -62,6 +62,12 @@ def students(request):
     # Render the HTML template index.html with the data in the context variable
     return render(request, 'main/students.html', context=context)
 
+def studentday(request):
+    pg,_ = ResourcePage.objects.get_or_create(title="StudentDay")
+    context={"page":pg}
+    # Render the HTML template index.html with the data in the context variable
+    return render(request, 'main/studentday.html', context=context)
+
 def postdocs(request):
     pg,_ = ResourcePage.objects.get_or_create(title="Postdocs")
     awards = Award.objects.filter(careerstage=2).order_by('duedate')
