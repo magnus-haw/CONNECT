@@ -12,18 +12,22 @@
             </div>
         </div>
         <div class="card my-4">
-            <h5 class="card-header">Summary</h5>
+            <h5 class="card-header">Register!</h5>
             <div class="card-body">
                 {{page.volunteerblock|safe}}
             </div>
         </div>
 
-        <div class="col-lg-9">
+        <div class="col-lg-3">
             <div class="card my-4">
                 <h5 class="card-header">Resources</h5>
                 <div class="card-body">
-                    {% for res in resources %}
-                        <p>{{res.title}}</p>
+                    {% for res in page.resources.all %}
+                    {% if res.file %}
+                    <p><a href="{{res.file.url}}">{{res.title}}</a>: {{res.description}}</p>
+                    {% elif res.link %}
+                    <p><a href="{{res.link}}">{{res.title}}</a>: {{res.description}}</p>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
