@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'survey',
     'bootstrapform',
     'debug_toolbar',
+    'django_celery_beat',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +79,7 @@ CSP_SCRIPT_SRC = [
     "'unsafe-inline'",
 ]
 CSP_IMG_SRC = ["'self'", "https://dpp-static.s3.amazonaws.com",]
+CSP_FRAME_ANCESTORS = ("'self'", 'https://engage.aps.org')
 CSP_INCLUDE_NONCE_IN = ('script-src', )
 
 CRON_CLASSES = [
@@ -155,15 +158,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 if not config('LOCAL',cast=bool):
@@ -172,9 +170,9 @@ if not config('LOCAL',cast=bool):
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+##############################################
+### Static files (CSS, JavaScript, Images) ###
+##############################################
 if config('LOCAL',cast=bool):
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
@@ -203,7 +201,9 @@ else:
         os.path.join(BASE_DIR, 'static'),
     ]
 
-# CK Editor settings
+##########################
+### CK Editor settings ###
+##########################
 #CKEDITOR_BASEPATH = STATIC_URL+"/ckeditor/"
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -222,15 +222,9 @@ CKEDITOR_CONFIGS = {
     },
 }
 
-
-SENDGRID_API_KEY = config('SENDGRID_API_KEY')
-
-#EMAIL_HOST = 'smtp.sendgrid.net'
-#EMAIL_HOST_USER = 'apikey' # this is exactly the value 'apikey'
-#EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
-#EMAIL_PORT = 587
-#EMAIL_USE_TLS = True
-
+####################
+### EMAIL CONFIG ###
+####################
 EMAIL_HOST = config('EMAIL_HOST')
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
@@ -241,3 +235,17 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 CSV_DIRECTORY = Path("csv") # Define the directory where csv are exported
 TEX_DIRECTORY = Path("tex") # Define the directory where tex files and pdf are exported
+
+
+#####################
+### CELERY CONFIG ###
+#####################
+REDIS_PSWD = config('REDIS_PSWD')
+CELERY_BROKER_URL = 'redis://:'+REDIS_PSWD+ '@localhost:6379'
+CELERY_RESULT_BACKEND = 'django-db' #'redis://:'+REDIS_PSWD+'@localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
+

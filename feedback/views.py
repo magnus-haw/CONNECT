@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import ContactForm, EmailListForm
 from .models import Contact, EmailList
+from .tasks import send_bcc_task
 
 def contactView(request):
     if request.method == 'GET':
@@ -31,12 +32,14 @@ def emailListView(request, list_pk):
             subject = "["+mylist.name +"] "+ form.cleaned_data['subject']
             message = form.cleaned_data['message']
             try:
-                mail = EmailMessage(subject, message, 'chair@dpp-connect.org', bcc=mylist.list())
-                mail.send()
+                #mail = EmailMessage(subject, message, 'chair@dpp-connect.org', bcc=mylist.list())
+                #mail.send()
+                send_bcc_task.delay(subject,message,mylist.list())
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')
     return render(request, "emaillist.html", {'form': form, 'list':mylist})
+
 
 def successView(request):
     return HttpResponse('Success! Thank you for your message.')
